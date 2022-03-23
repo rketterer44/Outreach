@@ -11,6 +11,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D4567A6B-E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outreach.API", "Outreach.API\Outreach.API.csproj", "{DFE1F872-7093-4AB2-A9E7-BDBE0411E7E4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E2492542-2EA0-4DB4-8568-6D4A681CED16}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmarks", "benchmarks", "{0A8D3B63-EC2D-4601-AEC8-25B3E1BF7CD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outreach.UnitTests", "Outreach.UnitTests\Outreach.UnitTests.csproj", "{B1336CF7-22FB-4AF1-8D9F-4502578C840A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,12 +31,17 @@ Global
 		{DFE1F872-7093-4AB2-A9E7-BDBE0411E7E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFE1F872-7093-4AB2-A9E7-BDBE0411E7E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFE1F872-7093-4AB2-A9E7-BDBE0411E7E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1336CF7-22FB-4AF1-8D9F-4502578C840A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1336CF7-22FB-4AF1-8D9F-4502578C840A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1336CF7-22FB-4AF1-8D9F-4502578C840A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1336CF7-22FB-4AF1-8D9F-4502578C840A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DFE1F872-7093-4AB2-A9E7-BDBE0411E7E4} = {9F5C8C4F-8238-48F4-90C6-56BFBC2E8823}
+		{B1336CF7-22FB-4AF1-8D9F-4502578C840A} = {E2492542-2EA0-4DB4-8568-6D4A681CED16}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D574807C-5408-412D-862D-37AE4E5DDF99}
