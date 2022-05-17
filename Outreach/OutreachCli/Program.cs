@@ -3,31 +3,24 @@
 using OutreachCli;
 using System.Diagnostics;
 using System.Net;
+using System.Text.Json;
 
-//var builder = WebApplication.CreateBuilder(args);
-//builder.Services.AddControllers();
-//builder.Services.AddEndpointsApiExplorer();
-
-//var app = builder.Build();
-//app.UseHttpsRedirection();
-//app.MapControllers();
-//app.Run();s
-
-
-var url = "https://api.outreach.io/oauth/authorize?client_id=5WohDIKnAUXmeiGFYAyhfcwQ-L3Gg8VrF8zHUpufP_Q&redirect_uri=https://www.bombora.com/oauth/outreach&response_type=code&scope=accounts.all";
 Console.WriteLine("Starting...");
+
+
+var url = "https://api.outreach.io/oauth/authorize?client_id=5WohDIKnAUXmeiGFYAyhfcwQ-L3Gg8VrF8zHUpufP_Q&redirect_uri=https://localhost:51903/api/v1/token/callback&response_type=code&scope=accounts.all";
 OpenUrl(url);
+await OAuthAsync();
 
 //string name = Environment.GetCommandLineArgs()[1];
 //Console.WriteLine($"Hello, {name}!");
-await OAuthAsync();
 
 async Task OAuthAsync()
 {
 
     //var config = await ServiceConfig.LoadAsync();
 
-    string token = null;
+    string code = null;
 
     using (var listener = new OAuthListener())
     {
@@ -36,7 +29,20 @@ async Task OAuthAsync()
         try
         {
             //autoauth = Process.Start(AutoAuthPath, $"{config.ClientId} {username} {password}");
-            token = await listener.WaitForOAuthCode();
+            code = await listener.WaitForOAuthCode();
+
+
+            var url = $"https://api.outreach.io/oauth/token?client_id=5WohDIKnAUXmeiGFYAyhfcwQ-L3Gg8VrF8zHUpufP_Q&client_secret=27HPjvWlniCJRsmZy8m9blNCU5GkfmJBYltz_u62Ipo&redirect_uri=https://localhost:51903/api/v1/token/callback&grant_type=authorization_code&code={code}";
+            using var client = new HttpClient();
+            var msg = new HttpRequestMessage(HttpMethod.Post, url);
+            //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
+            //Convert.ToBase64String(code));
+
+            var response = await client.SendAsync(msg);
+
+            var token = await response.Content.ReadAsStringAsync();
+            //string jsonString = JsonSerializer.Deserialize<WeatherForecast>(token);
+            Console.WriteLine(token);
             await listener.StopAsync();
         }
         finally
@@ -57,14 +63,12 @@ void OpenUrl(string url)
     var ps = new ProcessStartInfo(url)
     {
         UseShellExecute = true,
-        Verb = "open"
+        Verb = "open", 
+        CreateNoWindow = false
     };
     Process.Start(ps);
-    //var prs = new ProcessStartInfo("iexplore.exe");
-    //prs.Arguments = url;
-    //Process.Start(prs);
-    
 }
+
 
 
 

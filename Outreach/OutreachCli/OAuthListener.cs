@@ -38,7 +38,7 @@ namespace OutreachCli
                 //.ConfigureLogging(x => x.ClearProviders())
                 .UseKestrel()
                 .UseStartup<Startup>()
-                .UseUrls("https://localhost:52291/")
+                .UseUrls("https://localhost:51903/")
                 .Build();
 
             await _host.StartAsync();
